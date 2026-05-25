@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nantwich Lawns & Hedges — Phil's Ground Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#162716;--moss:#243d24;--sage:#4a6741;--leaf:#6fa05e;
+  --lime:#b8db8a;--cream:#f7f2e8;--parchment:#ede6d4;--white:#fefefe;
+  --ink:#1c1c1c;--wa:#25D366;--wa-dark:#128C7E;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Epilogue',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  background:rgba(22,39,22,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(184,219,138,0.1);
+}
+.logo-wrap{display:flex;align-items:center;gap:0.75rem;text-decoration:none}
+.logo-mark{
+  width:40px;height:40px;border-radius:50% 50% 50% 12%;
+  background:linear-gradient(135deg,var(--leaf),var(--lime));
+  display:grid;place-items:center;font-size:1.1rem;flex-shrink:0;
+}
+.logo-name{font-family:'Fraunces',serif;font-size:1rem;color:var(--cream);line-height:1.1}
+.logo-tagline{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--lime);font-weight:300}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-phone{color:rgba(247,242,232,0.65);font-size:0.85rem;text-decoration:none;transition:color 0.2s}
+.nav-phone:hover{color:var(--lime)}
+.nav-wa{
+  display:flex;align-items:center;gap:0.5rem;
+  background:var(--wa);color:#fff;padding:0.55rem 1.1rem;border-radius:50px;
+  font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s;
+}
+.nav-wa:hover{background:#1ebe5c;transform:translateY(-1px)}
+
+/* HERO */
+#hero{
+  min-height:100vh;background:var(--forest);
+  display:flex;align-items:center;padding:100px 0 0;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(111,160,94,0.18) 0%,transparent 70%);
+  top:-100px;right:-100px;pointer-events:none;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;padding:0 2.5rem;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;width:100%;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(184,219,138,0.1);border:1px solid rgba(184,219,138,0.25);
+  color:var(--lime);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+  padding:0.4rem 1rem;border-radius:50px;margin-bottom:1.6rem;
+}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1{
+  font-family:'Fraunces',serif;font-size:clamp(3rem,5.5vw,4.8rem);
+  font-weight:800;line-height:1.02;color:var(--white);
+  margin-bottom:1.4rem;letter-spacing:-0.01em;
+}
+h1 em{color:var(--lime);font-style:italic;font-weight:600}
+.hero-p{color:rgba(247,242,232,0.65);font-size:1rem;line-height:1.75;margin-bottom:2.5rem;max-width:420px}
+.wa-big{
+  display:inline-flex;align-items:center;gap:0.9rem;
+  background:var(--wa);color:#fff;padding:1rem 2rem;border-radius:16px;
+  font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.25s;
+  box-shadow:0 8px 32px rgba(37,211,102,0.35);margin-bottom:1rem;
+}
+.wa-big:hover{background:#1ebe5c;transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,0.45)}
+.wa-big-icon{font-size:1.4rem}
+.wa-sub{font-size:0.78rem;color:rgba(247,242,232,0.45);margin-bottom:2rem}
+.hero-stats{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08)}
+.stat-n{font-family:'Fraunces',serif;font-size:2rem;color:var(--lime)}
+.stat-l{font-size:0.75rem;color:rgba(247,242,232,0.45);margin-top:0.1rem}
+.hero-right{display:flex;flex-direction:column;gap:1rem}
+.phil-card{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+  border-radius:20px;padding:1.6rem;
+}
+.phil-card-title{font-family:'Fraunces',serif;font-size:0.95rem;color:var(--cream);margin-bottom:1rem}
+.service-btns{display:flex;flex-direction:column;gap:0.6rem}
+.svc-btn-row{
+  display:flex;align-items:center;gap:0.8rem;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;padding:0.8rem 1rem;cursor:pointer;transition:all 0.2s;color:var(--cream);
+}
+.svc-btn-row:hover,.svc-btn-row.active{background:rgba(111,160,94,0.2);border-color:rgba(111,160,94,0.5)}
+.svc-emoji2{font-size:1.3rem;flex-shrink:0}
+.svc-info{flex:1}
+.svc-name2{font-weight:500;font-size:0.88rem}
+.svc-from{font-size:0.72rem;color:rgba(247,242,232,0.45)}
+.svc-check{
+  width:22px;height:22px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.2);
+  display:grid;place-items:center;font-size:0.7rem;transition:all 0.2s;flex-shrink:0;
+}
+.svc-btn-row.active .svc-check{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.weather-card{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+  border-radius:20px;padding:1.4rem;display:flex;align-items:center;gap:1rem;
+}
+.weather-icon{font-size:2.2rem}
+.weather-info{flex:1}
+.weather-temp{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--cream)}
+.weather-desc{font-size:0.8rem;color:rgba(247,242,232,0.5);margin-top:0.1rem}
+.weather-verdict{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.05em;
+  padding:0.3rem 0.8rem;border-radius:50px;
+  background:rgba(184,219,138,0.15);color:var(--lime);
+}
+
+/* SECTIONS */
+section{padding:5.5rem 0}
+.container{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.eyebrow{
+  display:inline-block;font-size:0.72rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.7rem;
+}
+h2{
+  font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,2.8rem);
+  font-weight:800;line-height:1.1;color:var(--forest);margin-bottom:0.8rem;
+}
+.sec-p{font-size:0.95rem;color:#666;line-height:1.75;max-width:480px;margin-bottom:3rem}
+
+/* ENQUIRY */
+#enquire{background:var(--white)}
+.enquire-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+.enquire-left{position:sticky;top:110px}
+.trust-list{display:flex;flex-direction:column;gap:0.8rem;margin-top:2rem}
+.trust-row{
+  display:flex;align-items:center;gap:0.9rem;
+  padding:0.9rem 1rem;background:var(--cream);border-radius:14px;border:1px solid #e8dfc8;
+}
+.trust-icon{font-size:1.3rem}
+.trust-txt strong{display:block;font-size:0.85rem;color:var(--forest);font-weight:600}
+.trust-txt span{font-size:0.77rem;color:#999}
+.enquiry-widget{
+  background:var(--forest);border-radius:28px;padding:2.5rem;
+  box-shadow:0 30px 80px rgba(22,39,22,0.2);position:relative;overflow:hidden;
+}
+.enquiry-widget::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,219,138,0.1),transparent 70%);
+}
+.ew-title{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.3rem}
+.ew-sub{font-size:0.82rem;color:rgba(247,242,232,0.5);margin-bottom:2rem}
+.ew-label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:0.8rem;display:block}
+.ew-services{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.5rem}
+.ew-svc{
+  border:1.5px solid rgba(255,255,255,0.1);border-radius:14px;padding:1rem;
+  cursor:pointer;transition:all 0.2s;text-align:center;background:rgba(255,255,255,0.04);user-select:none;
+}
+.ew-svc:hover,.ew-svc.on{border-color:var(--leaf);background:rgba(111,160,94,0.18)}
+.ew-svc-icon{font-size:1.6rem;display:block;margin-bottom:0.4rem}
+.ew-svc-name{font-size:0.8rem;color:var(--cream);font-weight:500}
+.ew-svc-price{font-size:0.7rem;color:rgba(247,242,232,0.4);margin-top:0.15rem}
+.photo-drop{
+  border:2px dashed rgba(184,219,138,0.3);border-radius:16px;padding:1.8rem;
+  text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:1.2rem;
+  background:rgba(255,255,255,0.03);position:relative;
+}
+.photo-drop:hover{border-color:rgba(184,219,138,0.6);background:rgba(184,219,138,0.04)}
+.photo-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.photo-drop-icon{font-size:2rem;display:block;margin-bottom:0.5rem}
+.photo-drop-text{font-size:0.85rem;color:rgba(247,242,232,0.6)}
+.photo-drop-sub{font-size:0.72rem;color:rgba(247,242,232,0.35);margin-top:0.3rem}
+.photo-preview{display:none;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;justify-content:center}
+.photo-thumb{width:60px;height:60px;border-radius:10px;object-fit:cover;border:2px solid rgba(184,219,138,0.4)}
+.ew-fields{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:1rem}
+.ew-field{display:flex;flex-direction:column;gap:0.4rem}
+.ew-field label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,242,232,0.4);font-weight:500}
+.ew-input{
+  background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:0.75rem 1rem;
+  font-family:'Epilogue',sans-serif;font-size:0.9rem;color:var(--white);
+  outline:none;transition:border-color 0.2s;width:100%;
+}
+.ew-input::placeholder{color:rgba(255,255,255,0.25)}
+.ew-input:focus{border-color:var(--leaf)}
+.ew-note{margin-bottom:1.2rem}
+.ew-note textarea{
+  width:100%;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:0.75rem 1rem;resize:none;height:80px;
+  font-family:'Epilogue',sans-serif;font-size:0.88rem;color:var(--white);
+  outline:none;transition:border-color 0.2s;
+}
+.ew-note textarea::placeholder{color:rgba(255,255,255,0.25)}
+.ew-note textarea:focus{border-color:var(--leaf)}
+.wa-send{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:0.8rem;
+  background:var(--wa);color:#fff;border:none;padding:1.1rem;border-radius:16px;
+  font-family:'Epilogue',sans-serif;font-size:1rem;font-weight:700;
+  cursor:pointer;transition:all 0.25s;box-shadow:0 8px 28px rgba(37,211,102,0.4);
+}
+.wa-send:hover{background:#1ebe5c;transform:translateY(-2px);box-shadow:0 14px 36px rgba(37,211,102,0.5)}
+.wa-send-hint{font-size:0.75rem;color:rgba(247,242,232,0.4);text-align:center;margin-top:0.7rem}
+.msg-preview{
+  margin-top:1.2rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:1rem 1.2rem;
+  font-size:0.78rem;color:rgba(247,242,232,0.55);line-height:1.6;
+  font-family:monospace;display:none;white-space:pre-wrap;word-break:break-word;
+}
+.msg-preview.show{display:block}
+.msg-preview-label{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(247,242,232,0.3);margin-bottom:0.5rem;font-family:'Epilogue',sans-serif}
+
+/* WEATHER */
+#weather-section{background:var(--parchment)}
+.weather-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.weather-widget{
+  background:var(--white);border-radius:24px;border:1px solid #e8dfc8;
+  overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.05);
+}
+.weather-header{
+  background:var(--forest);padding:1.8rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.weather-loc{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--white)}
+.weather-loc span{font-size:0.75rem;font-family:'Epilogue',sans-serif;color:rgba(247,242,232,0.5);display:block;margin-top:0.1rem}
+.weather-main-icon{font-size:3rem}
+.weather-days{padding:1.5rem 2rem;display:flex;flex-direction:column;gap:0.8rem}
+.weather-day{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.7rem 1rem;border-radius:12px;transition:background 0.2s;
+}
+.weather-day:hover{background:var(--parchment)}
+.wd-name{font-size:0.85rem;font-weight:500;color:var(--forest);width:80px}
+.wd-icon{font-size:1.3rem}
+.wd-bar-wrap{flex:1;margin:0 1rem;height:6px;background:#e8dfc8;border-radius:3px;overflow:hidden}
+.wd-bar{height:100%;border-radius:3px;transition:width 0.5s}
+.wd-temp{font-family:'Fraunces',serif;font-size:0.9rem;color:var(--forest);width:50px;text-align:right}
+.wd-verdict{font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:50px;white-space:nowrap;margin-left:0.5rem}
+.wd-verdict.good{background:rgba(111,160,94,0.15);color:var(--sage)}
+.wd-verdict.ok{background:rgba(184,219,138,0.2);color:#7a9a5e}
+.wd-verdict.bad{background:rgba(200,100,100,0.1);color:#b06060}
+.weather-right h2{margin-bottom:0.8rem}
+.weather-right .sec-p{margin-bottom:1.5rem}
+.cut-advice{background:var(--forest);color:var(--white);border-radius:18px;padding:1.5rem;margin-top:1.5rem}
+.cut-advice h4{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:0.4rem;color:var(--lime)}
+.cut-advice p{font-size:0.82rem;color:rgba(247,242,232,0.65);line-height:1.65}
+
+/* AREA */
+#area{background:var(--white)}
+.area-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.postcode-tool{
+  background:var(--forest);border-radius:24px;padding:2rem;
+  box-shadow:0 20px 60px rgba(22,39,22,0.15);
+}
+.pct-title{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--white);margin-bottom:0.3rem}
+.pct-sub{font-size:0.82rem;color:rgba(247,242,232,0.5);margin-bottom:1.5rem}
+.pct-row{display:flex;gap:0.6rem}
+.pct-input{
+  flex:1;padding:0.8rem 1rem;background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;
+  color:var(--white);font-family:'Epilogue',sans-serif;font-size:0.9rem;
+  text-transform:uppercase;outline:none;letter-spacing:0.05em;
+}
+.pct-input::placeholder{color:rgba(255,255,255,0.25);text-transform:none}
+.pct-input:focus{border-color:var(--leaf)}
+.pct-btn{
+  background:var(--leaf);color:var(--forest);border:none;
+  padding:0.8rem 1.3rem;border-radius:12px;
+  font-family:'Epilogue',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;
+}
+.pct-btn:hover{background:var(--lime)}
+.pct-result{
+  margin-top:1rem;padding:0.9rem 1rem;border-radius:12px;
+  font-size:0.83rem;line-height:1.5;display:none;
+}
+.pct-result.yes{background:rgba(111,160,94,0.2);border:1px solid rgba(111,160,94,0.4);color:var(--lime)}
+.pct-result.no{background:rgba(255,180,180,0.1);border:1px solid rgba(255,180,180,0.2);color:#f4a4a4}
+.villages{display:flex;flex-direction:column;gap:0.5rem;margin-top:2rem}
+.village-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.7rem 1rem;border-radius:12px;border:1px solid #eee;font-size:0.85rem;transition:border-color 0.2s;
+}
+.village-row:hover{border-color:var(--leaf)}
+.village-name{color:var(--forest);font-weight:500}
+.village-dist{font-size:0.75rem;color:#999}
+.village-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* REVIEWS */
+#reviews{background:var(--cream)}
+.reviews-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem}
+.big-score{text-align:right}
+.big-num{font-family:'Fraunces',serif;font-size:4rem;color:var(--forest);line-height:1}
+.big-stars{color:#f4b942;font-size:1.1rem;letter-spacing:0.1em}
+.big-from{font-size:0.75rem;color:#aaa;margin-top:0.3rem}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.rcard{
+  background:var(--white);border:1px solid #e8dfc8;border-radius:20px;padding:1.6rem;transition:all 0.25s;
+}
+.rcard:hover{box-shadow:0 10px 35px rgba(0,0,0,0.07);transform:translateY(-3px);border-color:var(--leaf)}
+.rcard-top{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem}
+.rcard-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:0.9rem;color:#fff;flex-shrink:0}
+.rcard-name{font-weight:600;font-size:0.88rem;color:var(--forest)}
+.rcard-loc{font-size:0.73rem;color:#aaa}
+.rcard-stars{color:#f4b942;font-size:0.82rem;letter-spacing:0.08em}
+.rcard-text{font-size:0.85rem;color:#555;line-height:1.65;margin-top:0.6rem}
+.rcard-date{font-size:0.73rem;color:#ccc;margin-top:0.7rem}
+.rcard-g{font-size:0.72rem;color:#bbb;margin-top:0.6rem;border-top:1px solid #f0e8d8;padding-top:0.6rem;display:flex;align-items:center;gap:0.4rem}
+.review-cta{
+  background:var(--forest);border-radius:20px;padding:2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;margin-top:2rem;
+}
+.rca-text h3{font-family:'Fraunces',serif;color:var(--white);font-size:1.2rem;margin-bottom:0.3rem}
+.rca-text p{font-size:0.82rem;color:rgba(247,242,232,0.55)}
+.rca-btn{
+  display:flex;align-items:center;gap:0.6rem;background:var(--wa);color:#fff;
+  padding:0.8rem 1.5rem;border-radius:12px;font-weight:600;font-size:0.88rem;
+  text-decoration:none;transition:all 0.2s;white-space:nowrap;
+}
+.rca-btn:hover{background:#1ebe5c;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--forest);padding:4rem 0 2rem}
+.footer-grid{
+  display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:3rem;margin-bottom:3rem;
+  padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.footer-brand p{font-size:0.82rem;color:rgba(247,242,232,0.45);line-height:1.65;margin-top:0.8rem;margin-bottom:1.2rem;max-width:300px}
+.footer-col h4{font-family:'Fraunces',serif;font-size:0.95rem;color:var(--cream);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.55rem}
+.footer-col ul li a{font-size:0.82rem;color:rgba(247,242,232,0.45);text-decoration:none;transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--lime)}
+.fci{display:flex;align-items:flex-start;gap:0.7rem;font-size:0.82rem;color:rgba(247,242,232,0.5);margin-bottom:0.65rem}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:rgba(247,242,232,0.25)}
+.socials{display:flex;gap:0.7rem}
+.social-a{
+  width:32px;height:32px;border:1px solid rgba(255,255,255,0.12);border-radius:50%;
+  display:grid;place-items:center;text-decoration:none;font-size:0.8rem;
+  color:rgba(247,242,232,0.4);transition:all 0.2s;
+}
+.social-a:hover{border-color:var(--leaf);color:var(--lime)}
+.sticky-wa{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:150;
+  display:flex;align-items:center;gap:0.7rem;background:var(--wa);color:#fff;
+  padding:0.75rem 1.3rem;border-radius:50px;font-size:0.88rem;font-weight:700;
+  text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,0.45);transition:all 0.25s;
+}
+.sticky-wa:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(37,211,102,0.55)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner > *{animation:fadeUp 0.65s ease both}
+.hero-inner > *:nth-child(2){animation-delay:0.2s}
+
+@media(max-width:860px){
+  nav{padding:0.9rem 1.3rem}.nav-phone{display:none}
+  .hero-inner{grid-template-columns:1fr;gap:2rem;padding:0 1.3rem}.hero-right{display:none}
+  .container{padding:0 1.3rem}section{padding:4rem 0}
+  .enquire-layout,.weather-layout,.area-layout{grid-template-columns:1fr;gap:2rem}
+  .enquire-left{position:static}
+  .review-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .review-cta{flex-direction:column;gap:1.5rem;text-align:center}
+  .reviews-top{flex-direction:column;align-items:flex-start;gap:1rem}.big-score{text-align:left}
+  .footer-bottom{flex-direction:column;gap:0.5rem;text-align:center}
+  .ew-fields{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo-wrap" href="#">
+    <div class="logo-mark">🌿</div>
+    <div>
+      <div class="logo-name">Nantwich Lawns & Hedges</div>
+      <div class="logo-tagline">Phil's Ground Care · Est. 2010</div>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a class="nav-phone" href="tel:07951731505">📞 07951 731 505</a>
+    <a class="nav-wa" href="https://wa.me/447951731505" target="_blank">💬 WhatsApp Phil</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span></span> Nantwich's most trusted lawn care</div>
+      <h1>Your garden.<br><em>Phil's got it.</em></h1>
+      <p class="hero-p">Lawn cutting, hedge trimming and garden care across Nantwich, Audlem, Crewe and the surrounding villages. Drop Phil a WhatsApp and he'll come back to you when he can.</p>
+      <a class="wa-big" href="https://wa.me/447951731505?text=Hi%20Phil%2C%20I%27d%20like%20a%20quote%20for%20my%20garden!" target="_blank">
+        <span class="wa-big-icon">💬</span>
+        <div>
+          <div>WhatsApp Phil for a Quote</div>
+          <div style="font-size:0.72rem;opacity:0.8;font-weight:400">Gets back to you as soon as he can</div>
+        </div>
+      </a>
+      <div class="wa-sub">or scroll down to send your details and photos ↓</div>
+      <div class="hero-stats">
+        <div><div class="stat-n">400+</div><div class="stat-l">Happy customers</div></div>
+        <div><div class="stat-n">14yr</div><div class="stat-l">Experience</div></div>
+        <div><div class="stat-n">4.9★</div><div class="stat-l">Google rating</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="phil-card">
+        <div class="phil-card-title">What do you need?</div>
+        <div class="service-btns">
+          <div class="svc-btn-row" onclick="this.classList.toggle('active')">
+            <span class="svc-emoji2">🌱</span>
+            <div class="svc-info"><div class="svc-name2">Lawn Cutting</div><div class="svc-from">From £25 per visit</div></div>
+            <div class="svc-check">✓</div>
+          </div>
+          <div class="svc-btn-row" onclick="this.classList.toggle('active')">
+            <span class="svc-emoji2">✂️</span>
+            <div class="svc-info"><div class="svc-name2">Hedge Trimming</div><div class="svc-from">From £35 per session</div></div>
+            <div class="svc-check">✓</div>
+          </div>
+          <div class="svc-btn-row" onclick="this.classList.toggle('active')">
+            <span class="svc-emoji2">🍂</span>
+            <div class="svc-info"><div class="svc-name2">Garden Clearance</div><div class="svc-from">From £60 one-off</div></div>
+            <div class="svc-check">✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="weather-card">
+        <div class="weather-icon">⛅</div>
+        <div class="weather-info">
+          <div class="weather-temp">17°C · Nantwich</div>
+          <div class="weather-desc">Partly cloudy · Good cutting weather</div>
+        </div>
+        <div class="weather-verdict">✓ Great week</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;line-height:0">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block">
+      <path d="M0,55 Q80,15 160,45 Q240,75 320,38 Q400,5 480,42 Q560,72 640,38 Q720,5 800,42 Q880,72 960,40 Q1040,8 1120,44 Q1200,72 1280,40 Q1360,10 1440,44 L1440,80 L0,80Z" fill="#f7f2e8"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ENQUIRY TOOL -->
+<section id="enquire">
+  <div class="container">
+    <div class="enquire-layout">
+      <div class="enquire-left">
+        <span class="eyebrow">Send an Enquiry</span>
+        <h2>Tell Phil what you need</h2>
+        <p class="sec-p">Pick your services, snap a photo of your garden, and fire it straight to Phil's WhatsApp. He'll come back with a price — no faff, no waiting days.</p>
+        <div class="trust-list">
+          <div class="trust-row"><span class="trust-icon">⚡</span><div class="trust-txt"><strong>Usually replies within an hour</strong><span>Mon–Sat, 7am–6pm</span></div></div>
+          <div class="trust-row"><span class="trust-icon">📸</span><div class="trust-txt"><strong>Photo quoting means fewer surprises</strong><span>Phil sees your garden before he arrives</span></div></div>
+          <div class="trust-row"><span class="trust-icon">🤝</span><div class="trust-txt"><strong>No contracts, no commitment</strong><span>Book once or set up a regular round</span></div></div>
+          <div class="trust-row"><span class="trust-icon">💷</span><div class="trust-txt"><strong>Transparent pricing, always</strong><span>What he quotes is what you pay</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="enquiry-widget">
+          <div class="ew-title">Get your quote</div>
+          <div class="ew-sub">Fires straight to Phil's WhatsApp — he'll reply fast</div>
+
+          <span class="ew-label">1. What do you need?</span>
+          <div class="ew-services">
+            <div class="ew-svc" onclick="toggleSvc(this,'Lawn Cutting')"><span class="ew-svc-icon">🌱</span><div class="ew-svc-name">Lawn Cutting</div><div class="ew-svc-price">From £25</div></div>
+            <div class="ew-svc" onclick="toggleSvc(this,'Hedge Trimming')"><span class="ew-svc-icon">✂️</span><div class="ew-svc-name">Hedge Trimming</div><div class="ew-svc-price">From £35</div></div>
+            <div class="ew-svc" onclick="toggleSvc(this,'Garden Clearance')"><span class="ew-svc-icon">🍂</span><div class="ew-svc-name">Garden Clearance</div><div class="ew-svc-price">From £60</div></div>
+            <div class="ew-svc" onclick="toggleSvc(this,'Not sure yet')"><span class="ew-svc-icon">❓</span><div class="ew-svc-name">Not sure yet</div><div class="ew-svc-price">Phil will advise</div></div>
+          </div>
+
+          <span class="ew-label">2. Photo of your garden (optional but really helpful)</span>
+          <div class="photo-drop" id="photoDrop">
+            <input type="file" accept="image/*" multiple onchange="handlePhotos(this)">
+            <span class="photo-drop-icon">📷</span>
+            <div class="photo-drop-text">Tap to upload a photo</div>
+            <div class="photo-drop-sub">Phil can quote more accurately if he can see it</div>
+            <div class="photo-preview" id="photoPreview"></div>
+          </div>
+
+          <span class="ew-label">3. Your details</span>
+          <div class="ew-fields">
+            <div class="ew-field"><label>Your name</label><input class="ew-input" type="text" id="ewName" placeholder="e.g. Sarah"></div>
+            <div class="ew-field"><label>Postcode</label><input class="ew-input" type="text" id="ewPostcode" placeholder="e.g. CW5 5RH" style="text-transform:uppercase"></div>
+          </div>
+
+          <span class="ew-label">4. Anything else Phil should know?</span>
+          <div class="ew-note">
+            <textarea id="ewNote" placeholder="e.g. 'Garden hasn't been done in a while', 'big conifer hedge at the front', 'need it done before the 20th'…"></textarea>
+          </div>
+
+          <button class="wa-send" onclick="sendWA()">
+            <span style="font-size:1.3rem">💬</span> Send to Phil's WhatsApp
+          </button>
+          <div class="wa-send-hint">Opens WhatsApp with your message ready to send · Takes 2 seconds</div>
+
+          <div class="msg-preview" id="msgPreview">
+            <div class="msg-preview-label">Message preview</div>
+            <span id="msgPreviewText"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEATHER -->
+<section id="weather-section">
+  <div class="container">
+    <div class="weather-layout">
+      <div>
+        <div class="weather-widget">
+          <div class="weather-header">
+            <div>
+              <div class="weather-loc">Nantwich, Cheshire <span>5-day grass cutting forecast</span></div>
+            </div>
+            <div class="weather-main-icon">⛅</div>
+          </div>
+          <div class="weather-days" id="weatherDays"></div>
+        </div>
+      </div>
+      <div class="weather-right">
+        <span class="eyebrow">Garden Weather</span>
+        <h2>Good week for a cut?</h2>
+        <p class="sec-p">Phil only cuts when the grass is right. This widget shows the week ahead so you can plan — no point booking if it's going to tip it down.</p>
+        <div class="cut-advice">
+          <h4>💡 Phil's cutting tip</h4>
+          <p>Grass cuts best when it's dry on top but not parched underneath. After heavy rain, give it 24 hours before cutting — especially if you want those stripes to show.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AREA -->
+<section id="area">
+  <div class="container">
+    <div class="area-layout">
+      <div>
+        <span class="eyebrow">Coverage Area</span>
+        <h2>Where Phil works</h2>
+        <p class="sec-p">Based in Nantwich and covering the surrounding Cheshire villages. Check your postcode to see if he reaches you.</p>
+        <div class="villages" id="villageList"></div>
+      </div>
+      <div>
+        <div class="postcode-tool">
+          <div class="pct-title">Check your postcode</div>
+          <div class="pct-sub">Find out instantly if Phil covers your area</div>
+          <div class="pct-row">
+            <input class="pct-input" id="pctInput" type="text" placeholder="e.g. CW5 6AB">
+            <button class="pct-btn" onclick="checkPC()">Check</button>
+          </div>
+          <div class="pct-result" id="pctResult"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-top">
+      <div><span class="eyebrow">Reviews</span><h2>What the neighbours say</h2></div>
+      <div class="big-score"><div class="big-num">4.9</div><div class="big-stars">★★★★★</div><div class="big-from">84 Google reviews</div></div>
+    </div>
+    <div class="review-grid">
+      <div class="rcard">
+        <div class="rcard-top"><div class="rcard-av" style="background:#4a6741">JH</div><div><div class="rcard-name">Janet H.</div><div class="rcard-loc">📍 Nantwich</div></div></div>
+        <div class="rcard-stars">★★★★★</div>
+        <div class="rcard-text">Phil's been doing ours for three years. Always on time, always leaves it spotless. Genuinely one of those tradespeople you're glad you found.</div>
+        <div class="rcard-date">March 2025</div>
+        <div class="rcard-g">🟢 Google Review</div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-top"><div class="rcard-av" style="background:#8b6f4e">DM</div><div><div class="rcard-name">Dave M.</div><div class="rcard-loc">📍 Audlem</div></div></div>
+        <div class="rcard-stars">★★★★★</div>
+        <div class="rcard-text">Nightmare hedge that hadn't been touched in years. Phil sorted it in an afternoon and it looks incredible. Reasonable price, hard-working — highly recommended.</div>
+        <div class="rcard-date">January 2025</div>
+        <div class="rcard-g">🟢 Google Review</div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-top"><div class="rcard-av" style="background:#243d24">SR</div><div><div class="rcard-name">Susan R.</div><div class="rcard-loc">📍 Willaston</div></div></div>
+        <div class="rcard-stars">★★★★★</div>
+        <div class="rcard-text">Phil transformed our completely overgrown garden in a day when we moved in. Been on a regular fortnightly cut ever since. Can't recommend him enough.</div>
+        <div class="rcard-date">November 2024</div>
+        <div class="rcard-g">🟢 Google Review</div>
+      </div>
+    </div>
+    <div class="review-cta">
+      <div class="rca-text">
+        <h3>Happy with Phil's work?</h3>
+        <p>A quick Google review means the world — takes 30 seconds and helps other locals find him</p>
+      </div>
+      <a class="rca-btn" href="#" target="_blank">⭐ Leave a Review</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap"><div class="logo-mark">🌿</div><div><div class="logo-name" style="color:var(--cream)">Nantwich Lawns & Hedges</div><div class="logo-tagline">Phil's Ground Care</div></div></div>
+        <p>Professional, reliable lawn and hedge care across Nantwich and the Cheshire villages. Fully insured. No contracts needed.</p>
+        <div class="socials"><a class="social-a" href="#">f</a><a class="social-a" href="#">★</a><a class="social-a" href="#">💬</a></div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul><li><a href="#">Lawn Cutting</a></li><li><a href="#">Hedge Trimming</a></li><li><a href="#">Garden Clearance</a></li><li><a href="#">Regular Rounds</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <div>
+          <div class="fci">📞 <span>07951 731 505</span></div>
+          <div class="fci">💬 <span>WhatsApp preferred</span></div>
+          <div class="fci">🕐 <span>Mon–Sat · 7am–6pm</span></div>
+          <div class="fci">📍 <span>Nantwich, Cheshire</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nantwich Lawns & Hedges · Fully insured</span>
+      <span>Privacy Policy</span>
+    </div>
+  </div>
+</footer>
+
+<a class="sticky-wa" href="https://wa.me/447951731505?text=Hi%20Phil!" target="_blank">
+  <span style="font-size:1.1rem">💬</span> WhatsApp Phil
+</a>
+
+<script>
+// Service toggles
+const selected = new Set();
+function toggleSvc(el, name) {
+  el.classList.toggle('on');
+  selected.has(name) ? selected.delete(name) : selected.add(name);
+  updatePreview();
+}
+
+// Photo upload
+let photoNames = [];
+function handlePhotos(input) {
+  const preview = document.getElementById('photoPreview');
+  preview.style.display = 'flex';
+  preview.innerHTML = '';
+  photoNames = [];
+  Array.from(input.files).slice(0,3).forEach(file => {
+    const url = URL.createObjectURL(file);
+    const img = document.createElement('img');
+    img.src = url; img.className = 'photo-thumb';
+    preview.appendChild(img);
+    photoNames.push(file.name);
+  });
+  updatePreview();
+}
+
+// Build WhatsApp message
+function buildMsg() {
+  const name = document.getElementById('ewName').value.trim() || 'there';
+  const pc   = document.getElementById('ewPostcode').value.trim() || 'not given';
+  const note = document.getElementById('ewNote').value.trim();
+  const svcs = selected.size > 0 ? [...selected].join(', ') : 'Not specified yet';
+  const pics = photoNames.length > 0 ? `(I'll send ${photoNames.length} photo${photoNames.length>1?'s':''} through on WhatsApp)` : '(no photos — happy to send some separately if it helps)';
+  let msg = `Hi Phil! 👋\n\nMy name is ${name} and I'd love a quote.\n\n🌿 Services needed: ${svcs}\n📍 My postcode: ${pc}\n📸 Photos: ${pics}`;
+  if (note) msg += `\n\n💬 Extra info: ${note}`;
+  msg += `\n\nWhen are you next available? Thanks!`;
+  return msg;
+}
+
+function updatePreview() {
+  const preview = document.getElementById('msgPreview');
+  document.getElementById('msgPreviewText').textContent = buildMsg();
+  preview.classList.add('show');
+}
+['ewName','ewPostcode','ewNote'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+
+function sendWA() {
+  window.open('https://wa.me/447951731505?text=' + encodeURIComponent(buildMsg()), '_blank');
+}
+
+// Weather
+const days = [
+  {name:'Today', icon:'⛅', temp:'17°C', rain:15, verdict:'good',  vtext:'Good'},
+  {name:'Tue',   icon:'☀️',  temp:'19°C', rain:5,  verdict:'good',  vtext:'Perfect'},
+  {name:'Wed',   icon:'☀️',  temp:'21°C', rain:0,  verdict:'good',  vtext:'Perfect'},
+  {name:'Thu',   icon:'🌦️', temp:'14°C', rain:65, verdict:'bad',   vtext:'Avoid'},
+  {name:'Fri',   icon:'⛅', temp:'16°C', rain:25, verdict:'ok',    vtext:'OK'},
+];
+const colours = {good:'#6fa05e', ok:'#b8db8a', bad:'#c07070'};
+const wd = document.getElementById('weatherDays');
+days.forEach(d => {
+  wd.innerHTML += `<div class="weather-day">
+    <div class="wd-name">${d.name}</div>
+    <div class="wd-icon">${d.icon}</div>
+    <div class="wd-bar-wrap"><div class="wd-bar" style="width:${Math.max(8,d.rain)}%;background:${colours[d.verdict]}"></div></div>
+    <div class="wd-temp">${d.temp}</div>
+    <div class="wd-verdict ${d.verdict}">${d.vtext}</div>
+  </div>`;
+});
+
+// Villages
+const villages = [
+  {name:'Nantwich', dist:'Home base', c:'#6fa05e'},
+  {name:'Audlem', dist:'~6 miles', c:'#6fa05e'},
+  {name:'Crewe', dist:'~4 miles', c:'#6fa05e'},
+  {name:'Worleston', dist:'~3 miles', c:'#4a6741'},
+  {name:'Willaston', dist:'~5 miles', c:'#4a6741'},
+  {name:'Wrenbury', dist:'~5 miles', c:'#4a6741'},
+  {name:'Shavington', dist:'~5 miles', c:'#4a6741'},
+  {name:'Wybunbury', dist:'~4 miles', c:'#4a6741'},
+];
+const vl = document.getElementById('villageList');
+villages.forEach(v => {
+  vl.innerHTML += `<div class="village-row"><div class="village-dot" style="background:${v.c}"></div><div class="village-name">${v.name}</div><div class="village-dist">${v.dist}</div></div>`;
+});
+
+// Postcode checker
+function checkPC() {
+  const val = document.getElementById('pctInput').value.trim().toUpperCase();
+  const res = document.getElementById('pctResult');
+  if (!val) return;
+  const covered = ['CW1','CW2','CW3','CW5','CW6','SY13','ST7'];
+  const prefix = val.replace(/\s/g,'').substring(0,3);
+  const ok = covered.some(c => prefix.startsWith(c.replace(/\s/g,'')));
+  res.style.display = 'block';
+  if (ok) {
+    res.className = 'pct-result yes';
+    res.innerHTML = `✅ Phil covers <strong>${val}</strong>! <a href="https://wa.me/447951731505?text=Hi%20Phil%2C%20I%27m%20in%20${encodeURIComponent(val)}%20and%20need%20a%20quote" target="_blank" style="color:var(--lime);text-decoration:underline">WhatsApp him now →</a>`;
+  } else {
+    res.className = 'pct-result no';
+    res.innerHTML = `Phil doesn't usually cover <strong>${val}</strong> but drop him a message — he may be able to help depending on the job.`;
+  }
+}
+document.getElementById('pctInput').addEventListener('keydown', e => { if(e.key==='Enter') checkPC(); });
+</script>
+</body>
+</html>
